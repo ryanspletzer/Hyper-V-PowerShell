@@ -13,6 +13,7 @@ function checkPath {
     }
 }
 
+
 # Test that necessary paths and files exist
 # Don't create the workingDir automatically - if it doesn't exist, the variables probably need the be configured first.
 if (-not (Test-Path -Path $workingDir -PathType Container)) {
@@ -128,6 +129,7 @@ $unattendSource = [xml]@"
 </unattend>
 "@
 
+
 function CSVLogger {
     param (
         [string] $vhd,
@@ -190,6 +192,7 @@ function CSVLogger {
     }
 }
 
+
 function Logger {
     param (
         [string]
@@ -206,6 +209,7 @@ function Logger {
     write-Host "]::$($message)" -ForegroundColor White
 }
 
+
 # Helper function for no error file cleanup
 function cleanupFile {
     param (
@@ -217,7 +221,6 @@ function cleanupFile {
         Remove-Item $file -Recurse > $null
     }
 }
-
 
 
 function GetUnattendChunk {
@@ -237,6 +240,7 @@ function GetUnattendChunk {
         | select -ExpandProperty component `
         | ? name -eq $component
 }
+
 
 function makeUnattendFile {
     param (
@@ -305,6 +309,7 @@ function makeUnattendFile {
     $Unattend.Save($filePath)
 }
 
+
 function createRunAndWaitVM {
     param (
         [string]
@@ -340,6 +345,7 @@ function createRunAndWaitVM {
     Remove-VM $factoryVMName -Force
 }
 
+
 function MountVHDandRunBlock {
     param (
         [string]
@@ -366,6 +372,7 @@ function MountVHDandRunBlock {
     # Wait 2 seconds for activity to clean up
     Start-Sleep -Seconds 2
 }
+
 
 ### Update script block
 $updateCheckScriptBlock = {
@@ -525,6 +532,7 @@ $updateCheckScriptBlock = {
     }
 }
 
+
 function Set-UpdateCheckPlaceHolders {
     $block = $updateCheckScriptBlock | Out-String -Width 4096
 
@@ -540,6 +548,7 @@ function Set-UpdateCheckPlaceHolders {
     }
     return $block
 }
+
 
 ### Sysprep script block
 $sysprepScriptBlock = {
@@ -605,6 +614,7 @@ $postSysprepScriptBlock = {
     # Put any code you want to run Post sysprep here
     Invoke-Expression 'shutdown -r -t 0'
 }
+
 
 # This is the main function of this script
 function Start-ImageFactory {
@@ -913,6 +923,7 @@ function Start-ImageFactory {
         cleanupFile $sysprepVHD
     }
 }
+
 
 if ($startfactory) {
 
