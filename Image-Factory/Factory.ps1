@@ -482,8 +482,7 @@ $updateCheckScriptBlock = {
 
     # Need to add check for Internet connectivity due to Windows 7 driver load timing fail
 	logger "Checking for Internet connection"
-    do
-    {
+    do {
         Start-Sleep -Seconds 5
 		logger "Checking for Internet connection"
     } until (Test-Connection -computername www.microsoft.com)
