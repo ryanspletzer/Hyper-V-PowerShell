@@ -40,7 +40,7 @@ if (Test-Path -Path "$($workingDir)\resources\Convert-WindowsImage.ps1") {
 }
 
 # Check that PSWindowsUpdate module exists
-if(!(Test-Path -Path "$($workingDir)\Resources\bits\PSWindowsUpdate\PSWindowsUpdate.psm1")) {
+if (!(Test-Path -Path "$($workingDir)\Resources\bits\PSWindowsUpdate\PSWindowsUpdate.psm1")) {
     Write-Host -ForegroundColor Green "Please download PSWindowsUpdate and extract to $($workingDir)\Resources\bits"
     Write-Host -ForegroundColor Green "`nhttps://gallery.technet.microsoft.com/scriptcenter/2d191bcd-3308-4edd-9de2-88dff796b0bc`n"
     throw 'Missing PSWindowsUpdate module'
@@ -893,7 +893,7 @@ function Start-ImageFactory {
         cleanupFile $finalVHD
         logger $FriendlyName "Convert differencing disk into pristine base image"
         Convert-VHD -Path $sysprepVHD -DestinationPath $finalVHD -VHDType Dynamic
-        if($CleanWinSXS) {
+        if ($CleanWinSXS) {
             logger $FriendlyName "Cleaning windows component store. Be patient, this may take awhile."
             MountVHDandRunBlock $finalVHD {
                 # Clean up the WinSXS store, and remove any superceded components. Updates will no longer be able to be uninstalled,
